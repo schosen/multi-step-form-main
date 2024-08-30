@@ -53,7 +53,7 @@ export default function Wishlist({
 					Provide a wishlist title and details
 				</legend>
 				<label
-					htmlFor="name"
+					htmlFor="title"
 					className={`${personalStyles.label} ${utilStyles.colorText}`}
 				>
 					{" "}

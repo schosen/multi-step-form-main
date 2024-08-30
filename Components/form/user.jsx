@@ -67,7 +67,7 @@ export default function User({
 					Please provide your name, email address, and phone number.
 				</legend>
 				<label
-					htmlFor="name"
+					htmlFor="firstName"
 					className={`${personalStyles.label} ${utilStyles.colorText}`}
 				>
 					{" "}
@@ -84,8 +84,8 @@ export default function User({
 						value={user.first_name}
 						onChange={handleFirstNameChange}
 						placeholder="e.g. John"
-						id="name"
-						name="name"
+						id="firstName"
+						name="firstName"
 						maxLength={32}
 					/>
 				</label>

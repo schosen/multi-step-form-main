@@ -8,11 +8,11 @@ export default function Product({
 }) {
     const priorityOptions = ["high", "medium", "low"];
 
-	function handleNameChange(e) {
-		setProduct([{
+	function handleProductNameChange(e) {
+		setProduct({
 			...product,
 			name: e.target.value,
-		}]);
+		});
 	}
 
     function handleLinkChange(e) {
@@ -69,7 +69,7 @@ export default function Product({
 					Provide a product details
 				</legend>
 				<label
-					htmlFor="name"
+					htmlFor="ProductName"
 					className={`${personalStyles.label} ${utilStyles.colorText}`}
 				>
 					{" "}
@@ -84,10 +84,10 @@ export default function Product({
 						}`}
 						type="text"
 						value={product.name}
-						onChange={handleNameChange}
+						onChange={handleProductNameChange}
 						placeholder="e.g. Shoes"
-						id="name"
-						name="name"
+						id="productName"
+						name="productName"
 						// maxLength={32}
 					/>
 				</label>

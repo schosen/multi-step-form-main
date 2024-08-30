@@ -19,9 +19,7 @@ export default function Home() {
       description: "",
       occasion_date: "",
       address: "",
-      products: [{
-
-      }],
+      products: [],
     },
 
     // planInfo: { cardOption: 0, timeframe: false },
@@ -49,6 +47,7 @@ export default function Home() {
 			// 	...formData,
 			// 	addOnsInfo: info,
 			// });
+			{console.log("INDEX: INFO FOR PRODUCT",info)}
 			setFormData({
 				...formData.wishlist,
 				products: [info],
