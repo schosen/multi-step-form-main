@@ -1,9 +1,11 @@
 import utilStyles from "../../styles/utils.module.css";
 import formStyles from "../../styles/Form.module.css";
 import { useState } from "react";
-import PersonalInfo from "./personalInfo";
-import SelectPlan from "./selectPlan/selectPlan";
-import PickAddOns from "./pickAddOns/pickAddOns";
+import User from "./user";
+// import SelectPlan from "./selectPlan/selectPlan";
+import Wishlist from "./wishlist";
+import Product from "./product";
+// import PickAddOns from "./pickAddOns/pickAddOns";
 import Summary from "./summary";
 import ThankYou from "./thankYou";
 import {
@@ -11,6 +13,8 @@ import {
 	emailRegex,
 	phoneNumberRegex,
 } from "../../constants/regex/regexConstants";
+import { addToWishList } from '../../utils/localStorage';
+
 
 export default function Form({
 	step,
@@ -19,13 +23,23 @@ export default function Form({
 	updateFormData,
 	toggleYearly,
 }) {
-	const [personalInfo, setPersonalInfo] = useState({
-		...formData.personalInfo,
+
+	const [user, setUser] = useState({
+		...formData.user,
 	});
+
+	const [wishlist, setWishlist] = useState({
+		...formData.wishlist,
+	});
+
 	const [validForm, setValidForm] = useState({
 		hasValidName: true,
 		hasValidEmailAddress: true,
 		hasValidPhoneNumber: true,
+	});
+
+	const [product, setProduct] = useState({
+		...formData.products
 	});
 
 	const [selectPlanInfo, setSelectPlanInfo] = useState({
@@ -39,10 +53,15 @@ export default function Form({
 		e.preventDefault();
 		if (step == 1) {
 			formValidation();
+			updateFormData(wishlist);
+			// updateFormData(selectPlanInfo);
+
 		} else if (step == 2) {
-			updateFormData(selectPlanInfo);
+			// updateFormData(addOnsInfo);
+			updateFormData(product)
+
 		} else if (step == 3) {
-			updateFormData(addOnsInfo);
+			formValidation();
 		}
 
 		if (step != 1) {
@@ -56,53 +75,78 @@ export default function Form({
 	}
 
 	function formValidation() {
-		let hasValidName = nameRegex.test(personalInfo.name);
-		let hasValidEmailAddress = emailRegex.test(personalInfo.email);
-		let hasValidPhoneNumber = phoneNumberRegex.test(
-			personalInfo.phoneNumber
-		);
-		if (personalInfo.name == "") hasValidName = undefined;
-		if (personalInfo.email == "") hasValidEmailAddress = undefined;
-		if (personalInfo.phoneNumber == "") hasValidPhoneNumber = undefined;
+		//TODO: add validation for other fields
+		let hasValidName = nameRegex.test(user.name);
+		let hasValidEmailAddress = emailRegex.test(user.email);
+		// let hasValidPhoneNumber = phoneNumberRegex.test(
+		// 	user.phoneNumber
+		// );
+		if (user.name == "") hasValidName = undefined;
+		if (user.email == "") hasValidEmailAddress = undefined;
+		// if (user.phoneNumber == "") hasValidPhoneNumber = undefined;
 		setValidForm({
 			hasValidName,
 			hasValidEmailAddress,
-			hasValidPhoneNumber,
+			// hasValidPhoneNumber,
 		});
 		if (
-			[hasValidName, hasValidEmailAddress, hasValidPhoneNumber].every(
+			[hasValidName,
+				// hasValidEmailAddress,
+				// hasValidPhoneNumber
+			].every(
 				(value) => value == true
 			)
 		) {
-			updateFormData(personalInfo);
+			// TODO: the below is not executing
+			updateFormData(user);
 			setStep((s) => s + 1);
 		}
 	}
 
+	const handleAddToWishList = () => {
+		addToWishList(formData);
+		alert('Product added to wish list!');
+  	};
+
 	if (step != 5)
 		return (
 			<form onSubmit={handleSubmit}>
+				{console.log(step)}
 				{step == 1 && (
-					<PersonalInfo
-						personalInfo={personalInfo}
-						setPersonalInfo={setPersonalInfo}
+
+					<Wishlist
+						wishlist={wishlist}
+						setWishlist={setWishlist}
+						validForm={validForm}
+					/>
+					// <SelectPlan
+					// 	selectPlanInfo={selectPlanInfo}
+					// 	setSelectPlanInfo={setSelectPlanInfo}
+					// />
+				)}
+				{step == 2 && (
+					< Product
+						product={product}
+						setProduct={setProduct}
+						validForm={validForm}
+					/>
+
+					// <PickAddOns
+					// 	addOns={addOnsInfo}
+					// 	setAddOns={setAddOnsInfo}
+					// 	yearly={selectPlanInfo.timeframe}
+					// />
+
+				)}
+				{step == 3 && (
+
+					<User
+						user={user}
+						setUser={setUser}
 						validForm={validForm}
 					/>
 				)}
-				{step == 2 && (
-					<SelectPlan
-						selectPlanInfo={selectPlanInfo}
-						setSelectPlanInfo={setSelectPlanInfo}
-					/>
-				)}
-				{step == 3 && (
-					<PickAddOns
-						addOns={addOnsInfo}
-						setAddOns={setAddOnsInfo}
-						yearly={selectPlanInfo.timeframe}
-					/>
-				)}
-				{step == 4 && (
+				{/* {step == 4 && (
 					<Summary
 						formData={formData}
 						toggleYearly={() => {
@@ -113,7 +157,7 @@ export default function Form({
 							toggleYearly();
 						}}
 					/>
-				)}
+				)} */}
 				<div className={formStyles.bottom}>
 					<button
 						type="button"
@@ -126,16 +170,38 @@ export default function Form({
 					>
 						Go Back
 					</button>
+					{step == 3 ?
 					<button
+						type="submit"
+						className={`${formStyles.bottomButton} ${
+							step == 4 && formStyles.buttonConfirm
+						}`}
+						onClick={handleAddToWishList}
+					> Confirm
+					</button> :
+					<button
+						type="submit"
+						className={`${formStyles.bottomButton} ${
+							step == 4 && formStyles.buttonConfirm
+						}`}
+					> Next Step
+					</button>}
+					{/* <button
 						type="submit"
 						className={`${formStyles.bottomButton} ${
 							step == 4 && formStyles.buttonConfirm
 						}`}
 					>
 						{step == 4 ? "Confirm" : "Next Step"}
-					</button>
+					</button> */}
 				</div>
 			</form>
 		);
-	else return <ThankYou />;
+	else return (
+		<>
+		{console.log(step)}
+		{console.log(formData)}
+		<ThankYou />
+		</>
+	);
 }
