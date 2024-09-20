@@ -3,17 +3,17 @@ import Step from "../Components/step";
 import Form from "../Components/form/form";
 import { useState } from "react";
 
-const stepTitles = ["your info", "select plan", "add-ons", "summary"];
+const stepTitles = ["create wishlist", "add product", "sign up/ login"];
 
 export default function Home() {
 	const [formData, setFormData] = useState({
-    user: {
-      first_name: "",
-      email: "",
-      last_name: "",
-      gender: "",
-      birthday: "",
-    },
+    // user: {
+    //   first_name: "",
+    //   email: "",
+    //   last_name: "",
+    //   gender: "",
+    //   birthday: "",
+    // },
     wishlist: {
       title: "",
       description: "",
@@ -43,37 +43,33 @@ export default function Home() {
       		});
 
 		} else if (step == 2) {
-			// setFormData({
-			// 	...formData,
-			// 	addOnsInfo: info,
-			// });
-			{console.log("INDEX: INFO FOR PRODUCT",info)}
 			setFormData({
 				...formData.wishlist,
 				products: [info],
 			});
-			// here is where I add the key, value for products array
-    	} else if (step == 3) {
+    	}
 
-			setFormData({
-              ...formData,
-              // Probably better to add each individual key:value of user but oh well
-              user: info,
-            });
-		}
+		// else if (step == 3) {
+
+		// 	setFormData({
+        //       ...formData,
+        //       // Probably better to add each individual key:value of user but oh well
+        //       user: info,
+        //     });
+		// }
 	}
 
-	function toggleYearly() {
-		setFormData({
-			user: { ...formData.user },
-			wishlist: { ...formData.wishlist},
-			// planInfo: {
-			// 	...formData.planInfo,
-			// 	timeframe: !formData.planInfo.timeframe,
-			// },
-			addOnsInfo: { ...formData.addOnsInfo },
-		});
-	}
+	// function toggleYearly() {
+	// 	setFormData({
+	// 		user: { ...formData.user },
+	// 		wishlist: { ...formData.wishlist},
+	// 		// planInfo: {
+	// 		// 	...formData.planInfo,
+	// 		// 	timeframe: !formData.planInfo.timeframe,
+	// 		// },
+	// 		addOnsInfo: { ...formData.addOnsInfo },
+	// 	});
+	// }
 
 	return (
 		<>
@@ -100,7 +96,7 @@ export default function Home() {
 					setStep={setStep}
 					formData={formData}
 					updateFormData={updateFormData}
-					toggleYearly={toggleYearly}
+					// toggleYearly={toggleYearly}
 				/>
 			</main>
 		</>

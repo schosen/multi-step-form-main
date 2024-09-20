@@ -21,12 +21,12 @@ export default function Form({
 	setStep,
 	formData,
 	updateFormData,
-	toggleYearly,
+	// toggleYearly,
 }) {
 
-	const [user, setUser] = useState({
-		...formData.user,
-	});
+	// const [user, setUser] = useState({
+	// 	...formData.user,
+	// });
 
 	const [wishlist, setWishlist] = useState({
 		...formData.wishlist,
@@ -38,16 +38,15 @@ export default function Form({
 		hasValidPhoneNumber: true,
 	});
 
-	const [product, setProduct] = useState({
-		...formData.products
-	});
+	// const [product, setProduct] = useState([]);
+	const [products, setProducts] = useState([]);
 
-	const [selectPlanInfo, setSelectPlanInfo] = useState({
-		...formData.planInfo,
-	});
-	const [addOnsInfo, setAddOnsInfo] = useState({
-		...formData.addOnsInfo,
-	});
+	// const [selectPlanInfo, setSelectPlanInfo] = useState({
+	// 	...formData.planInfo,
+	// });
+	// const [addOnsInfo, setAddOnsInfo] = useState({
+	// 	...formData.addOnsInfo,
+	// });
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -58,11 +57,13 @@ export default function Form({
 
 		} else if (step == 2) {
 			// updateFormData(addOnsInfo);
-			updateFormData(product)
+			updateFormData(products)
 
-		} else if (step == 3) {
-			formValidation();
 		}
+
+		// else if (step == 3) {
+		// 	formValidation();
+		// }
 
 		if (step != 1) {
 			setStep((s) => s + 1);
@@ -76,13 +77,15 @@ export default function Form({
 
 	function formValidation() {
 		//TODO: add validation for other fields
-		let hasValidName = nameRegex.test(user.name);
-		let hasValidEmailAddress = emailRegex.test(user.email);
+		// let hasValidName = nameRegex.test(user.name);
+		// let hasValidEmailAddress = emailRegex.test(user.email);
+		let hasValidName = nameRegex.test("Test Name");
+		let hasValidEmailAddress = emailRegex.test("test@email.com");
 		// let hasValidPhoneNumber = phoneNumberRegex.test(
 		// 	user.phoneNumber
 		// );
-		if (user.name == "") hasValidName = undefined;
-		if (user.email == "") hasValidEmailAddress = undefined;
+		// if (user.name == "") hasValidName = undefined;
+		// if (user.email == "") hasValidEmailAddress = undefined;
 		// if (user.phoneNumber == "") hasValidPhoneNumber = undefined;
 		setValidForm({
 			hasValidName,
@@ -97,8 +100,8 @@ export default function Form({
 				(value) => value == true
 			)
 		) {
-			// TODO: the below is not executing
-			updateFormData(user);
+			// TODO: this should update wishlist or product
+			// updateFormData(user);
 			setStep((s) => s + 1);
 		}
 	}
@@ -126,8 +129,8 @@ export default function Form({
 				)}
 				{step == 2 && (
 					< Product
-						product={product}
-						setProduct={setProduct}
+						products={products}
+						setProducts={setProducts}
 						validForm={validForm}
 					/>
 
@@ -136,16 +139,15 @@ export default function Form({
 					// 	setAddOns={setAddOnsInfo}
 					// 	yearly={selectPlanInfo.timeframe}
 					// />
-
 				)}
-				{step == 3 && (
+				{/* {step == 3 && (
 
 					<User
 						user={user}
 						setUser={setUser}
 						validForm={validForm}
 					/>
-				)}
+				)} */}
 				{/* {step == 4 && (
 					<Summary
 						formData={formData}
@@ -199,8 +201,7 @@ export default function Form({
 		);
 	else return (
 		<>
-		{console.log(step)}
-		{console.log(formData)}
+		{/* TODO add sign or login here */}
 		<ThankYou />
 		</>
 	);
