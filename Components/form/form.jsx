@@ -7,7 +7,7 @@ import Wishlist from "./wishlist";
 import Product from "./product";
 // import PickAddOns from "./pickAddOns/pickAddOns";
 import Summary from "./summary";
-import ThankYou from "./thankYou";
+import AuthCTA from "./authCta";
 import {
 	nameRegex,
 	emailRegex,
@@ -106,12 +106,12 @@ export default function Form({
 		}
 	}
 
-	const handleAddToWishList = () => {
+	const handleStoreLocally = () => {
 		addToWishList(formData);
 		alert('Product added to wish list!');
   	};
 
-	if (step != 5)
+	// if (step != 5)
 		return (
 			<form onSubmit={handleSubmit}>
 				{console.log(step)}
@@ -140,14 +140,9 @@ export default function Form({
 					// 	yearly={selectPlanInfo.timeframe}
 					// />
 				)}
-				{/* {step == 3 && (
-
-					<User
-						user={user}
-						setUser={setUser}
-						validForm={validForm}
-					/>
-				)} */}
+				{step == 3 && (
+					<AuthCTA />
+				)}
 				{/* {step == 4 && (
 					<Summary
 						formData={formData}
@@ -176,15 +171,15 @@ export default function Form({
 					<button
 						type="submit"
 						className={`${formStyles.bottomButton} ${
-							step == 4 && formStyles.buttonConfirm
+							step == 3 && formStyles.buttonConfirm
 						}`}
-						onClick={handleAddToWishList}
-					> Confirm
+						onClick={handleStoreLocally}
+					> Sign in
 					</button> :
 					<button
 						type="submit"
 						className={`${formStyles.bottomButton} ${
-							step == 4 && formStyles.buttonConfirm
+							step == 3 && formStyles.buttonConfirm
 						}`}
 					> Next Step
 					</button>}
@@ -199,10 +194,10 @@ export default function Form({
 				</div>
 			</form>
 		);
-	else return (
-		<>
-		{/* TODO add sign or login here */}
-		<ThankYou />
-		</>
-	);
+	// else return (
+	// 	<>
+	// 	{/* TODO add sign or login here */}
+	// 	<AuthCTA />
+	// 	</>
+	// );
 }

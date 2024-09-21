@@ -82,6 +82,7 @@ export default function Product({
 
 
 	const handleRemoveProduct = (index) => {
+		// creates new array without the item to remove (using index to remove)
 		const updatedProducts = products.filter((_, i) => i !== index);
 		setProducts(updatedProducts);
 	};
@@ -254,13 +255,13 @@ export default function Product({
 					<button onClick={handleClick}> Add New Product </button>
 					<ul>
 						{products.map((p, index) => (
-						<li key={index}>
+						<li key={index} id={index}>
 							{p.name} - ${p.price}{' '}
-							<button onClick={() => handleRemoveProduct(index)}>Remove</button>
+							<button type="button" onClick={() => handleRemoveProduct(index)}>Remove</button>
 						</li>
 						))}
 					</ul>
-				</>
+   				</>
 			}
 		</fieldset>
 

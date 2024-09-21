@@ -1,16 +1,16 @@
-.sectionThankYou{
+.sectionAuthCTA{
     display: flex;
     align-items: center;
     justify-content: center;
     width:100%;
 }
 
-.articleThankYou{
+.articleAuthCTA{
     text-align: center;
 }
 
 @media(max-width:1299px){
-    .sectionThankYou{
+    .sectionAuthCTA{
         padding:3rem 0;
     }
     .margins{
@@ -18,11 +18,11 @@
     }
 }
 @media(min-width:1300px){
-    .imageThankYou{
+    .imageAuthCTA{
         width:108px;
         height:108px;
     }
-    .articleThankYou{
+    .articleAuthCTA{
         width:580px;
      margin-left:0.6rem;
     }

@@ -45,7 +45,7 @@ export default function Home() {
 		} else if (step == 2) {
 			setFormData({
 				...formData.wishlist,
-				products: [info],
+				products: info,
 			});
     	}
 
