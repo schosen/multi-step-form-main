@@ -43,6 +43,8 @@ export default function Wishlist({
 			);
 	}
 
+	// ADD WELCOME HERE AS A JAVASCRIPT TOGGLE
+
 	return (
 		<>
 			<h1 className={`${utilStyles.title} ${utilStyles.colorText}`}>
@@ -59,12 +61,12 @@ export default function Wishlist({
 					{" "}
 					<div className={personalStyles.labelContainer}>
 						<span>Title</span>
-						{getError(validForm.hasValidName)}
-						{console.log(validForm.hasValidName)}
+						{getError(validForm.hasValidTitle)}
+						{console.log(validForm.hasValidTitle)}
 					</div>
 					<input
 						className={`${personalStyles.inputOne} ${
-							!validForm.hasValidName &&
+							!validForm.hasValidTitle &&
                             utilStyles.containerError
 						}`}
 						type="text"
@@ -73,7 +75,8 @@ export default function Wishlist({
 						placeholder="e.g. Birthday Wishlist"
 						id="title"
 						name="title"
-						// maxLength={32}
+						// required
+						maxLength={32}
 					/>
 				</label>
 				<label
@@ -86,10 +89,7 @@ export default function Wishlist({
 						{/* {getError(validForm.hasValidEmailAddress)} */}
 					</div>
 					<input
-						className={`${personalStyles.inputOne} ${
-							!validForm.hasValidName &&
-							utilStyles.containerError
-						}`}
+						className={`${personalStyles.inputOne}`}
 						type="text"
 						value={wishlist.description}
 						onChange={handleDescriptionChange}
@@ -106,14 +106,9 @@ export default function Wishlist({
 					{" "}
 					<div className={personalStyles.labelContainer}>
 						<span>Occasion Date</span>
-						{/* {getError(validForm.hasValidName)}
-						{console.log(validForm.hasValidName)} */}
 					</div>
 					<input
-						className={`${personalStyles.inputOne} ${
-							!validForm.hasValidName &&
-                            utilStyles.containerError
-						}`}
+						className={`${personalStyles.inputOne}`}
 						type="date"
 						value={wishlist.occasion_date}
 						onChange={handleOccasionDateChange}
@@ -131,14 +126,9 @@ export default function Wishlist({
 					{" "}
 					<div className={personalStyles.labelContainer}>
 						<span>Address</span>
-						{/* {getError(validForm.hasValidName)}
-						{console.log(validForm.hasValidName)} */}
 					</div>
 					<input
-						className={`${personalStyles.inputOne} ${
-							!validForm.hasValidName &&
-                            utilStyles.containerError
-						}`}
+						className={`${personalStyles.inputOne}`}
 						type="text"
 						value={wishlist.address}
 						onChange={handleAddressChange}

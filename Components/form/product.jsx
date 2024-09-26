@@ -1,14 +1,16 @@
 import utilStyles from "../../styles/utils.module.css";
 import personalStyles from "../../styles/Product.module.css";
-import { useState } from "react";
+import { useState , useEffect} from "react";
+import { linkRegex } from "../../constants/regex/regexConstants";
 
 export default function Product({
 	products,
 	setProducts,
 	validForm,
+	setValidForm
 }) {
 	const [isProductSelected, setIsProductSelected] = useState(false)
-	const [product, setProduct] = useState([]);
+	const [product, setProduct] = useState({name: "", link: "", priority: "", price: "", image: "", notes: ""});
 	// const [products, setProducts] = useState([]);
 	// const [showForm, setShowForm] = useState(false);
 
@@ -71,9 +73,27 @@ export default function Product({
 	};
 
 	const handleAddProduct = () => {
-		if (product.name && product.price) {
+
+		let hasValidName;
+		let hasValidPrice;
+		let hasValidLink;
+
+		product.name == "" ? hasValidName = undefined : hasValidName = true;
+		product.price == "" ? hasValidPrice = undefined : hasValidPrice = true;
+
+		if (product.link == undefined || product.link == "")  {
+			hasValidLink = true
+		} else {
+			hasValidLink = linkRegex.test(product.link);
+		}
+
+		setValidForm({...validForm, hasValidName, hasValidPrice, hasValidLink})
+		// if (product.name && product.price) {
+		if (hasValidName == true && hasValidPrice == true && hasValidLink == true) {
+
 			setProducts([...products, product]);
-			// setProduct({ name: '', price: '' });
+			setProduct({name: "", link: "", priority: "", price: "", image: "", notes: ""});
+			console.log("setProducts has been set")
 			setIsProductSelected(false);
 			// setShowForm(false);
 		}
@@ -131,12 +151,12 @@ export default function Product({
 						{" "}
 						<div className={personalStyles.labelContainer}>
 							<span>Link</span>
-							{getError(validForm.hasValidName)}
-							{console.log(validForm.hasValidName)}
+							{getError(validForm.hasValidLink)}
+							{console.log(validForm.hasValidLink)}
 						</div>
 						<input
-							className={`${personalStyles.inputOne} ${
-								!validForm.hasValidName && utilStyles.containerError
+							className={`${personalStyles.inputOne}  ${
+								!validForm.hasValidLink && utilStyles.containerError
 							}`}
 							type="url"
 							value={product.link}
@@ -155,11 +175,11 @@ export default function Product({
 						{" "}
 						<div className={personalStyles.labelContainer}>
 							<span>Price</span>
-							{/* {getError(validForm.hasValidEmailAddress)} */}
+							{getError(validForm.hasValidPrice)}
 						</div>
 						<input
 							className={`${personalStyles.inputOne} ${
-								// !validForm.hasValidEmailAddress &&
+								!validForm.hasValidPrice &&
 								utilStyles.containerError
 							}`}
 							type="number"
@@ -178,12 +198,8 @@ export default function Product({
 						{" "}
 						<div className={personalStyles.labelContainer}>
 							<span>Priority</span>
-							{getError(validForm.hasValidName)}
-							{console.log(validForm.hasValidName)}
 						</div>
-						<select className={`${personalStyles.inputOne} ${
-								!validForm.hasValidName && utilStyles.containerError
-							}`}
+						<select className={`${personalStyles.inputOne}`}
 							id="priority"
 							name="priority"
 							value={product.priority}
@@ -211,10 +227,8 @@ export default function Product({
 							{console.log(validForm.hasValidName)} */}
 						</div>
 						<input
-							className={`${personalStyles.inputOne} ${
-								!validForm.hasValidName && utilStyles.containerError
-							}`}
-							type="text"
+							className={`${personalStyles.inputOne}`}
+							type="file"
 							value={product.image}
 							onChange={handleImageChange}
 							// placeholder="e.g. Doe"
@@ -231,13 +245,9 @@ export default function Product({
 						{" "}
 						<div className={personalStyles.labelContainer}>
 							<span>Notes</span>
-							{getError(validForm.hasValidName)}
-							{console.log(validForm.hasValidName)}
 						</div>
 						<input
-							className={`${personalStyles.inputOne} ${
-								!validForm.hasValidName && utilStyles.containerError
-							}`}
+							className={`${personalStyles.inputOne}`}
 							type="text"
 							value={product.notes}
 							onChange={handleNotesChange}
@@ -247,7 +257,7 @@ export default function Product({
 							// maxLength={32}
 						/>
 					</label>
-					<button onClick={handleAddProduct}> Add product </button>
+					<button type='button' onClick={handleAddProduct}> Add product </button>
 					<button onClick={handleClick}> Cancel </button>
 				</>
 				:

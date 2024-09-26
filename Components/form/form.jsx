@@ -12,6 +12,7 @@ import {
 	nameRegex,
 	emailRegex,
 	phoneNumberRegex,
+	linkRegex,
 } from "../../constants/regex/regexConstants";
 import { addToWishList } from '../../utils/localStorage';
 
@@ -33,9 +34,10 @@ export default function Form({
 	});
 
 	const [validForm, setValidForm] = useState({
+		hasValidTitle: true,
 		hasValidName: true,
-		hasValidEmailAddress: true,
-		hasValidPhoneNumber: true,
+		hasValidPrice: true,
+		hasValidLink: true,
 	});
 
 	// const [product, setProduct] = useState([]);
@@ -57,7 +59,7 @@ export default function Form({
 
 		} else if (step == 2) {
 			// updateFormData(addOnsInfo);
-			updateFormData(products)
+			updateFormData(products);
 
 		}
 
@@ -69,6 +71,7 @@ export default function Form({
 			setStep((s) => s + 1);
 		}
 	}
+
 	function handleGoBack() {
 		setStep((s) => {
 			return s - 1;
@@ -76,30 +79,38 @@ export default function Form({
 	}
 
 	function formValidation() {
+		let hasValidTitle;
+
+		// if (step == 1 ) {
+		wishlist.title == "" ? hasValidTitle = undefined : hasValidTitle = true;
+		{console.log("wishlist.title ", wishlist.title)}
+		// }
+
+
 		//TODO: add validation for other fields
 		// let hasValidName = nameRegex.test(user.name);
 		// let hasValidEmailAddress = emailRegex.test(user.email);
-		let hasValidName = nameRegex.test("Test Name");
-		let hasValidEmailAddress = emailRegex.test("test@email.com");
 		// let hasValidPhoneNumber = phoneNumberRegex.test(
 		// 	user.phoneNumber
 		// );
 		// if (user.name == "") hasValidName = undefined;
 		// if (user.email == "") hasValidEmailAddress = undefined;
 		// if (user.phoneNumber == "") hasValidPhoneNumber = undefined;
-		setValidForm({
-			hasValidName,
-			hasValidEmailAddress,
+		setValidForm({...validForm,
+			hasValidTitle
+			// hasValidEmailAddress,
 			// hasValidPhoneNumber,
 		});
 		if (
-			[hasValidName,
+			[
+				hasValidTitle,
+				// hasValidName,
+				// hasValidPrice,
 				// hasValidEmailAddress,
 				// hasValidPhoneNumber
 			].every(
 				(value) => value == true
-			)
-		) {
+			)) {
 			// TODO: this should update wishlist or product
 			// updateFormData(user);
 			setStep((s) => s + 1);
@@ -132,6 +143,7 @@ export default function Form({
 						products={products}
 						setProducts={setProducts}
 						validForm={validForm}
+						setValidForm={setValidForm}
 					/>
 
 					// <PickAddOns
