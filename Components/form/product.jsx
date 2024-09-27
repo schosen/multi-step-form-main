@@ -1,7 +1,10 @@
 import utilStyles from "../../styles/utils.module.css";
 import personalStyles from "../../styles/Product.module.css";
-import { useState , useEffect} from "react";
+import { useState } from "react";
 import { linkRegex } from "../../constants/regex/regexConstants";
+import { uploadImage } from "../../utils/imageStorage";
+import Image from 'next/image'
+
 
 export default function Product({
 	products,
@@ -10,9 +13,9 @@ export default function Product({
 	setValidForm
 }) {
 	const [isProductSelected, setIsProductSelected] = useState(false)
-	const [product, setProduct] = useState({name: "", link: "", priority: "", price: "", image: "", notes: ""});
-	// const [products, setProducts] = useState([]);
-	// const [showForm, setShowForm] = useState(false);
+	const [product, setProduct] = useState({name: "", link: "", priority: "", price: "", image: null , notes: ""});
+	const [errMessage, setErrMessage] = useState("")
+
 
     const priorityOptions = ["high", "medium", "low"];
 
@@ -43,11 +46,32 @@ export default function Product({
 		});
 	}
 	function handleImageChange(e) {
+		e.target.files[0];
 		setProduct({
 			...product,
 			image: e.target.value,
 		});
 	}
+
+	const handleImageUpload = (event) => {
+		const file = event.target.files[0];
+		if (file) {
+		uploadImage(
+			file,
+			(base64Image) => {
+				setErrMessage('');
+				setValidForm({...validForm, hasValidLink: true})
+				setProduct({...product,
+					image: base64Image}); // Store the Base64 string of the image
+			},
+			(errorMessage) => {
+				console.log(errorMessage)
+				setErrMessage(errorMessage)
+				setValidForm({...validForm, hasValidLink: false})
+			}
+		);
+		}
+	};
 
     function handleNotesChange(e) {
 		setProduct({
@@ -63,6 +87,15 @@ export default function Product({
 					{validator === undefined
 						? "This field is required"
 						: "Invalid format"}
+				</span>
+			);
+	}
+
+	function getImageError(validator, message) {
+		if (!validator)
+			return (
+				<span className={utilStyles.error}>
+					{message}
 				</span>
 			);
 	}
@@ -92,8 +125,7 @@ export default function Product({
 		if (hasValidName == true && hasValidPrice == true && hasValidLink == true) {
 
 			setProducts([...products, product]);
-			setProduct({name: "", link: "", priority: "", price: "", image: "", notes: ""});
-			console.log("setProducts has been set")
+			setProduct({name: "", link: "", priority: "", price: "", image: null, notes: ""});
 			setIsProductSelected(false);
 			// setShowForm(false);
 		}
@@ -223,19 +255,21 @@ export default function Product({
 						{" "}
 						<div className={personalStyles.labelContainer}>
 							<span>Image</span>
-							{/* {getError(validForm.hasValidName)}
-							{console.log(validForm.hasValidName)} */}
+							{getImageError(validForm.hasValidImage, errMessage)}
+							{console.log(validForm.hasValidImage)}
 						</div>
 						<input
 							className={`${personalStyles.inputOne}`}
 							type="file"
-							value={product.image}
-							onChange={handleImageChange}
+							accept=".jpeg,.png"
+							// value={product.image}
+							onChange={handleImageUpload}
 							// placeholder="e.g. Doe"
 							id="image"
 							name="image"
 							// maxLength={32}
 						/>
+						{product.image && <Image src={product.image} alt={product.name} width="60" height="60"/>}
 					</label>
 
 					<label
@@ -266,6 +300,7 @@ export default function Product({
 					<ul>
 						{products.map((p, index) => (
 						<li key={index} id={index}>
+							{p.image && <Image src={p.image} alt="Preview" width="60" height="60"/>}
 							{p.name} - ${p.price}{' '}
 							<button type="button" onClick={() => handleRemoveProduct(index)}>Remove</button>
 						</li>
