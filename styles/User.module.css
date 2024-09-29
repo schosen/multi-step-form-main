@@ -17,14 +17,14 @@
 
 .inputOne::placeholder{
     color:var(--cool-gray);
-    
+
 }
 .inputOne:focus{
     outline:none;
     border-color:var(--purplish-blue);
 }
 
-@media(max-width:1299px){
+@media(max-width:768px){
     .label{
         font-size:12px;
         margin-bottom:0.8rem;
@@ -43,7 +43,7 @@
         border-radius:0.3rem;
         font-weight:700;
     }
-    
+
     .inputOne::placeholder{
         font-size:14px;
         font-weight:700;
@@ -51,7 +51,7 @@
 
 }
 
-@media(min-width:1300px){
+@media(min-width:769px){
     .label{
         font-size:19px;
         margin-bottom:1.8rem;

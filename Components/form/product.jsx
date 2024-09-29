@@ -1,5 +1,5 @@
 import utilStyles from "../../styles/utils.module.css";
-import personalStyles from "../../styles/Product.module.css";
+import productStyles from "../../styles/Product.module.css";
 import { useState } from "react";
 import { linkRegex } from "../../constants/regex/regexConstants";
 import { uploadImage } from "../../utils/imageStorage";
@@ -45,14 +45,6 @@ export default function Product({
 			priority: e.target.value,
 		});
 	}
-	function handleImageChange(e) {
-		e.target.files[0];
-		setProduct({
-			...product,
-			image: e.target.value,
-		});
-	}
-
 	const handleImageUpload = (event) => {
 		const file = event.target.files[0];
 		if (file) {
@@ -154,16 +146,16 @@ export default function Product({
 				<>
 					<label
 						htmlFor="ProductName"
-						className={`${personalStyles.label} ${utilStyles.colorText}`}
+						className={`${productStyles.label} ${utilStyles.colorText}`}
 					>
 						{" "}
-						<div className={personalStyles.labelContainer}>
+						<div className={productStyles.labelContainer}>
 							<span>Name</span>
 							{getError(validForm.hasValidName)}
 							{console.log(validForm.hasValidName)}
 						</div>
 						<input
-							className={`${personalStyles.inputOne} ${
+							className={`${productStyles.inputOne} ${
 								!validForm.hasValidName && utilStyles.containerError
 							}`}
 							type="text"
@@ -178,16 +170,16 @@ export default function Product({
 
 					<label
 						htmlFor="link"
-						className={`${personalStyles.label} ${utilStyles.colorText}`}
+						className={`${productStyles.label} ${utilStyles.colorText}`}
 					>
 						{" "}
-						<div className={personalStyles.labelContainer}>
+						<div className={productStyles.labelContainer}>
 							<span>Link</span>
 							{getError(validForm.hasValidLink)}
 							{console.log(validForm.hasValidLink)}
 						</div>
 						<input
-							className={`${personalStyles.inputOne}  ${
+							className={`${productStyles.inputOne}  ${
 								!validForm.hasValidLink && utilStyles.containerError
 							}`}
 							type="url"
@@ -202,15 +194,15 @@ export default function Product({
 
 					<label
 						htmlFor="price"
-						className={`${personalStyles.label} ${utilStyles.colorText}`}
+						className={`${productStyles.label} ${utilStyles.colorText}`}
 					>
 						{" "}
-						<div className={personalStyles.labelContainer}>
+						<div className={productStyles.labelContainer}>
 							<span>Price</span>
 							{getError(validForm.hasValidPrice)}
 						</div>
 						<input
-							className={`${personalStyles.inputOne} ${
+							className={`${productStyles.inputOne} ${
 								!validForm.hasValidPrice &&
 								utilStyles.containerError
 							}`}
@@ -225,13 +217,13 @@ export default function Product({
 
 					<label
 						htmlFor="priority"
-						className={`${personalStyles.label} ${utilStyles.colorText}`}
+						className={`${productStyles.label} ${utilStyles.colorText}`}
 					>
 						{" "}
-						<div className={personalStyles.labelContainer}>
+						<div className={productStyles.labelContainer}>
 							<span>Priority</span>
 						</div>
-						<select className={`${personalStyles.inputOne}`}
+						<select className={`${productStyles.inputOne}`}
 							id="priority"
 							name="priority"
 							value={product.priority}
@@ -250,16 +242,16 @@ export default function Product({
 
 					<label
 						htmlFor="image"
-						className={`${personalStyles.label} ${utilStyles.colorText}`}
+						className={`${productStyles.label} ${utilStyles.colorText}`}
 					>
 						{" "}
-						<div className={personalStyles.labelContainer}>
+						<div className={productStyles.labelContainer}>
 							<span>Image</span>
 							{getImageError(validForm.hasValidImage, errMessage)}
 							{console.log(validForm.hasValidImage)}
 						</div>
 						<input
-							className={`${personalStyles.inputOne}`}
+							className={`${productStyles.inputOne}`}
 							type="file"
 							accept=".jpeg,.png"
 							// value={product.image}
@@ -274,14 +266,14 @@ export default function Product({
 
 					<label
 						htmlFor="notes"
-						className={`${personalStyles.label} ${utilStyles.colorText}`}
+						className={`${productStyles.label} ${utilStyles.colorText}`}
 					>
 						{" "}
-						<div className={personalStyles.labelContainer}>
+						<div className={productStyles.labelContainer}>
 							<span>Notes</span>
 						</div>
 						<input
-							className={`${personalStyles.inputOne}`}
+							className={`${productStyles.inputOne}`}
 							type="text"
 							value={product.notes}
 							onChange={handleNotesChange}
@@ -291,12 +283,15 @@ export default function Product({
 							// maxLength={32}
 						/>
 					</label>
-					<button type='button' onClick={handleAddProduct}> Add product </button>
-					<button onClick={handleClick}> Cancel </button>
+					<button
+					type='button'
+					className={`${productStyles.longButton}`}
+					onClick={handleAddProduct}> Add product </button>
+					<button className={`${productStyles.cancelButton}`}onClick={handleClick}> Cancel </button>
 				</>
 				:
 				<>
-					<button onClick={handleClick}> Add New Product </button>
+					<button className={`${productStyles.longButton}`} onClick={handleClick}> Add New Product +</button>
 					<ul>
 						{products.map((p, index) => (
 						<li key={index} id={index}>

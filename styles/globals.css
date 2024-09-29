@@ -4,6 +4,9 @@
     /* FONTS */
     --font-size-paragraph: 16px;
 
+    /* SIZE */
+    --form-min-height: 400px;
+
     /* COLORS */
     --marine-blue: hsl(213, 96%, 18%);
     --purplish-blue: hsl(243, 100%, 62%);
@@ -44,8 +47,8 @@ main{
 }
 
 aside{
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
@@ -58,7 +61,7 @@ li{
     list-style: none;
 }
 
-@media(max-width:1299px){
+@media(max-width:768px){
     body{
         position: relative;
     }
@@ -69,11 +72,11 @@ li{
         align-items: start;
     }
     main{
-        width:50%;
+        width:36%;
         min-width:345px;
         border-radius:0.8rem;
         margin-top:6.25rem;
-        padding:2rem 1.5rem;
+        padding:2rem 2rem 4rem 2rem;
     }
     aside{
         display: flex;
@@ -91,29 +94,67 @@ li{
         z-index:-1;
     }
 }
-@media(min-width:1300px){
-    body{
+@media(min-width:769px){
+    /* body{
         align-items: center;
+    } */
+
+    body{
+        position: relative;
     }
-    main{
+
+    /* main{
         height:800px;
         width:1255px;
         border-radius:1.5rem;
         padding:1.4rem;
+    } */
+    #__next{
+        width:100%;
+        display: flex;
+        justify-content: left;
+        align-items: start;
+        margin-left: 7%;
+    }
+
+    main{
+        width:365px;
+        /* min-width:345px; */
+        min-height:var(--form-min-height);
+        border-radius:0.8rem;
+        margin-top:6.25rem;
+        padding:2rem 2rem 4rem 2rem;
     }
     aside{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap:0.5rem;
+        padding-top:2rem;
+        height:8.8rem;
+        width:40%;
+        min-width:550px;
+        background-image: url("/images/bg-sidebar-mobile.svg");
+        position: absolute;
+        top: 10px;;
+        left: 10px;;
+        z-index:-1;
+        border-radius:2rem;
+    }
+
+    /* aside{
         padding: 3.15rem 2.5rem;
         height:100%;
         width:365px;
         min-width:365px;
         border-radius:1rem;
         background-image: url("/images/bg-sidebar-desktop.svg");
-    }
-    form{
+    } */
+    /* form{
         position: relative;
         padding: 3.1rem 113px 3.1rem 135px;
-    }
+    } */
     legend{
-        margin-bottom: 3.1rem;
+        margin-bottom: 1.5rem;
     }
 }

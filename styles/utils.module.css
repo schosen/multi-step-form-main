@@ -4,6 +4,7 @@
 
 .noBorder{
     border:none;
+    min-height:var(--form-min-height);
 }
 
 .description{
@@ -31,7 +32,7 @@
 }
 
 
-@media(max-width:1299px){
+@media(max-width:768px){
     .title{
         font-size:24px;
         margin-bottom: 0.5rem;
@@ -45,19 +46,32 @@
         font-size:14px;
     }
 }
-@media(min-width:1300px){
-    .title{
+@media(min-width:769px){
+    /* .title{
         font-size:43px;
         margin-bottom: 0.7rem;
     }
     .description{
         font-size:21px;
     }
-    .marginBottom35rem{
-        margin-bottom: 3.5rem;
-    }
+
     .price{
         font-size:18px;
         margin-bottom: -0.2rem;
+    } */
+    .title{
+        font-size:24px;
+        margin-bottom: 0.5rem;
     }
+    .description{
+        font-size:16px;
+        font-weight:700;
+        line-height:1.5rem;
+    }
+    .price{
+        font-size:14px;
+    }
+    /* .marginBottom35rem{
+        margin-bottom: 3.5rem;
+    } */
 }
