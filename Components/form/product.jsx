@@ -113,16 +113,13 @@ export default function Product({
 		}
 
 		setValidForm({...validForm, hasValidName, hasValidPrice, hasValidLink})
-		// if (product.name && product.price) {
 		if (hasValidName == true && hasValidPrice == true && hasValidLink == true) {
 
 			setProducts([...products, product]);
 			setProduct({name: "", link: "", priority: "", price: "", image: null, notes: ""});
 			setIsProductSelected(false);
-			// setShowForm(false);
 		}
   	};
-	// const handleFormToggle = () => setShowForm(!showForm);
 
 
 	const handleRemoveProduct = (index) => {

@@ -9,13 +9,7 @@ const stepTitles = ["create wishlist", "add product", "sign up/ login"];
 export default function Home() {
 	const [showForm, setShowForm] = useState(true);
 	const [formData, setFormData] = useState({
-    // user: {
-    //   first_name: "",
-    //   email: "",
-    //   last_name: "",
-    //   gender: "",
-    //   birthday: "",
-    // },
+
     wishlist: {
       title: "",
       description: "",
@@ -24,14 +18,6 @@ export default function Home() {
       products: [],
     },
 
-    // planInfo: { cardOption: 0, timeframe: false },
-    // addOnsInfo: {
-    //   "Online service": true,
-    //   "Larger storage": true,
-    //   "Customizable profile ": false,
-    // },
-
-    // products:{name: "", link: "", priority: "", price: "", image: "what data type?", notes: ""},
   });
   const [step, setStep] = useState(1);
 
@@ -39,7 +25,6 @@ export default function Home() {
     if (step == 1) {
       setFormData({
         ...formData,
-        // planInfo: info,
         wishlist: info,
       });
     } else if (step == 2) {
@@ -49,27 +34,7 @@ export default function Home() {
       });
     }
 
-    // else if (step == 3) {
-
-    // 	setFormData({
-    //       ...formData,
-    //       // Probably better to add each individual key:value of user but oh well
-    //       user: info,
-    //     });
-    // }
   }
-
-  // function toggleYearly() {
-  // 	setFormData({
-  // 		user: { ...formData.user },
-  // 		wishlist: { ...formData.wishlist},
-  // 		// planInfo: {
-  // 		// 	...formData.planInfo,
-  // 		// 	timeframe: !formData.planInfo.timeframe,
-  // 		// },
-  // 		addOnsInfo: { ...formData.addOnsInfo },
-  // 	});
-  // }
 
   const handleFormToggle = () => setShowForm(!showForm);
 
@@ -98,7 +63,6 @@ export default function Home() {
               setStep={setStep}
               formData={formData}
               updateFormData={updateFormData}
-              // toggleYearly={toggleYearly}
             />
           </>
         )}

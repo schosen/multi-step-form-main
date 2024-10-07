@@ -32,14 +32,6 @@
 }
 
 @media(max-width:768px){
-    /* .bottom{
-        bottom:0;
-        width:100%;
-        height:4.5rem;
-        padding:0 1rem;
-        align-items: center;
-        background-color: var(--white);
-    } */
     .bottom{
         width:18rem;
     }
@@ -63,11 +55,7 @@
         margin-left: 7%;
         left:0;
     }
-    /* .buttonGoBack{
-        margin-left:165px;
-        font-size:22px;
-        transition: color 0.5s ease;
-    } */
+
     .buttonGoBack{
         margin-left:8%;
         font-size:14px;
@@ -77,14 +65,7 @@
     .buttonGoBack:hover{
         color:var(--marine-blue);
     }
-    /* .bottomButton{
-        height:4rem;
-        width:10.4rem;
-        border-radius:0.5rem;
-        font-size:21px;
-        opacity:1;
-        transition: all 0.3s ease;
-    } */
+
     .bottomButton{
         height:2.5rem;
         width:6rem;

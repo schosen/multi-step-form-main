@@ -95,20 +95,11 @@ li{
     }
 }
 @media(min-width:769px){
-    /* body{
-        align-items: center;
-    } */
 
     body{
         position: relative;
     }
 
-    /* main{
-        height:800px;
-        width:1255px;
-        border-radius:1.5rem;
-        padding:1.4rem;
-    } */
     #__next{
         width:100%;
         display: flex;
@@ -142,18 +133,6 @@ li{
         border-radius:2rem;
     }
 
-    /* aside{
-        padding: 3.15rem 2.5rem;
-        height:100%;
-        width:365px;
-        min-width:365px;
-        border-radius:1rem;
-        background-image: url("/images/bg-sidebar-desktop.svg");
-    } */
-    /* form{
-        position: relative;
-        padding: 3.1rem 113px 3.1rem 135px;
-    } */
     legend{
         margin-bottom: 1.5rem;
     }

@@ -47,18 +47,7 @@
     }
 }
 @media(min-width:769px){
-    /* .title{
-        font-size:43px;
-        margin-bottom: 0.7rem;
-    }
-    .description{
-        font-size:21px;
-    }
 
-    .price{
-        font-size:18px;
-        margin-bottom: -0.2rem;
-    } */
     .title{
         font-size:24px;
         margin-bottom: 0.5rem;
@@ -71,7 +60,4 @@
     .price{
         font-size:14px;
     }
-    /* .marginBottom35rem{
-        margin-bottom: 3.5rem;
-    } */
 }
